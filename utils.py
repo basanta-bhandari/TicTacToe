@@ -2,7 +2,10 @@ import random
 import os
 import time
 
-game_running=True
+
+game_running = True
+
+
 a="1"
 b="2"
 c="3"
@@ -13,14 +16,14 @@ g="7"
 h="8"
 i="9"
 tic_tac_toe="""
-# ███████████████████████████████████████████████████████████████████████████████████
-# █▌████████╗██╗ ██████╗    ████████╗ █████╗  ██████╗    ████████╗ ██████╗ ███████╗▐█
-# █▌╚══██╔══╝██║██╔════╝    ╚══██╔══╝██╔══██╗██╔════╝    ╚══██╔══╝██╔═══██╗██╔════╝▐█
-# █▌   ██║   ██║██║            ██║   ███████║██║            ██║   ██║   ██║█████╗  ▐█
-# █▌   ██║   ██║██║            ██║   ██╔══██║██║            ██║   ██║   ██║██╔══╝  ▐█
-# █▌   ██║   ██║╚██████╗       ██║   ██║  ██║╚██████╗       ██║   ╚██████╔╝███████╗▐█
-# █▌   ╚═╝   ╚═╝ ╚═════╝       ╚═╝   ╚═╝  ╚═╝ ╚═════╝       ╚═╝    ╚═════╝ ╚══════╝▐█
-# ███████████████████████████████████████████████████████████████████████████████████
+  XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOX
+  XO████████╗██╗ ██████╗    ████████╗ █████╗  ██████╗    ████████╗ ██████╗ ███████╗XO
+  XO╚══██╔══╝██║██╔════╝    ╚══██╔══╝██╔══██╗██╔════╝    ╚══██╔══╝██╔═══██╗██╔════╝XO
+  XO   ██║   ██║██║            ██║   ███████║██║            ██║   ██║   ██║█████╗  XO
+  XO   ██║   ██║██║            ██║   ██╔══██║██║            ██║   ██║   ██║██╔══╝  XO
+  XO   ██║   ██║╚██████╗       ██║   ██║  ██║╚██████╗       ██║   ╚██████╔╝███████╗XO
+  XO   ╚═╝   ╚═╝ ╚═════╝       ╚═╝   ╚═╝  ╚═╝ ╚═════╝       ╚═╝    ╚═════╝ ╚══════╝XO
+  XOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOXOX
 """
 def get_current_lists():
     listh1=[a, b, c]
@@ -72,27 +75,35 @@ def check_win():
         if check_win_position(i)==True:
             return True
     return False
-        
+
+def get_possible_moves():
+    pmoves = []
+    for pos in [a, b, c, d, e, f, g, h, i]:
+        if pos != "X" and pos != "O":
+            pmoves.append(pos)
+    return pmoves
+
 def input_manager(position, character):
-    global a, b, c, d, e, f, g, h, i
-    if position=='1':
-        a = character
-    if position=='2':
-        b = character
-    if position=='3':
-        c = character
-    if position=='4':
-        d = character
-    if position=='5':
-        e = character
-    if position=='6':
-        f = character
-    if position=='7':
-        g = character
-    if position=='8':
-        h = character
-    if position=='9':
-        i = character
+    if position  in  get_possible_moves():
+        global a, b, c, d, e, f, g, h, i
+        if "1" in position:
+            a = character
+        if "2" in position:
+            b = character
+        if "3" in position:
+            c = character
+        if "4" in position:
+            d = character
+        if "5" in position:
+            e = character
+        if "6" in position:
+            f = character
+        if "7" in position:
+            g = character
+        if "8" in position:
+            h = character
+        if "9" in position:
+            i = character
 
 def print_grid():
     print(f"""
@@ -104,13 +115,50 @@ def print_grid():
     ( {g})| ( {h}) |( {i})
     """)
 
+def IvI_manual():
+    clear()
+    print(tic_tac_toe)
+    game_running = True
+    while game_running :
+        print_grid()
+        p1_xy=input("Player 1:\n character:O \n position:")
+        p1_xo='O'
+        input_manager(p1_xy, p1_xo)
+        print_grid()
+        if check_win():
+            print("Player 1 (O) wins!")
+            game_running = False
+            break
+        p2_xy=input("Player 2:\n character:X \n position:")
+        p2_xo='X'
+        input_manager(p2_xy, p2_xo)
+        print_grid()
+        if check_win():
+            print("Player 2 (X) wins!")
+            game_running = False
+            break
+
+def ask_mode():
+    ask =  input("Which mode would you like to play?(1/2):\n 1.Against computer, \n 2.1v1 against friends \n")
+    if ask == "1":
+        return 1
+    if ask == "2":
+        return -1
+    return 0
+
+def start_game():
+        print("Starting game.....")
+        time.sleep(1)
+        print("Loading logo......")
+        time.sleep(1)
+        print("Creating grid.....")
+        time.sleep(1)
+        clear()
+        print(tic_tac_toe)
+        print(grid)
 
 
-    
 
-
-
-    
 
 
 
